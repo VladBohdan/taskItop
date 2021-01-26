@@ -1,0 +1,10 @@
+<div class="container">
+  <h1>StopWatch</h1>
+  <div class="card">
+    <h2>App Counter: {{appCounterService.currentTimer | async}}</h2>
+    <button class="btn" (click)="start()">Start</button>
+    <button class="btn" (click)="wait()">Wait</button>
+    <button class="btn" (click)="reset()">Reset</button>
+    <button class="btn" (click)="stop()">Stop</button>
+  </div>
+</div>
