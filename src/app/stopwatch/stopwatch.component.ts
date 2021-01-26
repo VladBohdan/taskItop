@@ -1,27 +1,39 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AppCounterService} from '../services/app-counter.service';
 
 @Component({
   selector: 'app-stopwatch',
   templateUrl: './stopwatch.component.html',
   styleUrls: ['./stopwatch.component.scss'],
-  providers:  [ AppCounterService ],
+  providers: [AppCounterService],
 })
-export class StopwatchComponent  {
+export class StopwatchComponent {
 
-  constructor(public appCounterService: AppCounterService) {
+  reset(){
+    this.appCounterService.reset();
+  }
+
+  wait() {
+    this.appCounterService.click();
+  }
+
+  constructor(private appCounterService: AppCounterService) {
+  }
+
+  get currentTime() {
+    return this.appCounterService.timeCurrent;
   }
 
   start() {
     this.appCounterService.start();
   }
+
   stop() {
     this.appCounterService.stop();
   }
-  wait() {
-    this.appCounterService.wait();
-  }
-  reset() {
-    this.appCounterService.reset();
+
+
+  get isPause() {
+    return this.appCounterService.isPaused;
   }
 }
