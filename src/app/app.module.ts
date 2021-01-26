@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StopwatchComponent } from './stopwatch/stopwatch.component';
 import {AppCounterService} from './services/app-counter.service';
+import { TimeFormatPipe } from './pipes/time-format.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StopwatchComponent
+    StopwatchComponent,
+    TimeFormatPipe
   ],
   imports: [
     BrowserModule,

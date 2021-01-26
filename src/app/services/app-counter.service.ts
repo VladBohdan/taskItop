@@ -1,25 +1,36 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable()
 export class AppCounterService {
+  private timerId;
+  private isPaused = false;
+  private timeSubject = new BehaviorSubject<number>(0);
 
-  get currentTimer(): Observable<string>{
-    return of('00:00:15');
-  }
-  start(){
-    console.log('start');
+  get timeCurrent() {
+    return this.timeSubject.asObservable();
   }
 
-  stop(){
-    console.log('stop');
+  start() {
+    if (this.timerId) {
+      clearInterval(this.timerId);
+    }
+    this.timerId = setInterval(
+      () => this.timeSubject.next(this.timeSubject.value + +!this.isPaused),
+      1000
+    );
   }
 
   wait() {
-    console.log('wait');
+    this.isPaused = true;
   }
 
-  reset(){
-    console.log('reset');
+  reset() {
+    this.isPaused = false;
+  }
+
+  stop() {
+    this.timeSubject.next(0);
+    clearInterval(this.timerId);
   }
 }
